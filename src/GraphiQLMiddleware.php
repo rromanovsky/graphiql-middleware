@@ -4,8 +4,6 @@ namespace GraphiQLMiddleware;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-//require_once(__DIR__ . '/../vendor/autoload.php');
-
 class GraphiQLMiddleware
 {
     /**
@@ -71,13 +69,11 @@ class GraphiQLMiddleware
      */
     private function render(ServerRequestInterface $request)
     {
-//        $graphqlPath = $this->getGraphqlPath($request);
-//        $template = new \Text_Template(__DIR__ . '/graphiql/index.html');
-//        $template->setVar(['graphqlPath' => $graphqlPath]);
-//
-//        return $template->render();
-        echo file_get_contents(__DIR__ . "/graphiql/index.html");
-        exit;
+        $graphqlPath = $this->getGraphqlPath($request);
+        $template = new \Text_Template(__DIR__ . '/graphiql/index.html');
+        $template->setVar(['graphqlPath' => $graphqlPath]);
+
+        return $template->render();
     }
 
     /**
