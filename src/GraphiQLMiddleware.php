@@ -4,8 +4,6 @@ namespace GraphiQLMiddleware;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-require_once(__DIR__ . '/../vendor/autoload.php');
-
 class GraphiQLMiddleware
 {
     /**
@@ -26,9 +24,9 @@ class GraphiQLMiddleware
     /**
      * @param array $params
      *
-     * $params['route']                        string
-     * $params['ingoreRoute']  boolean
-     * $params['graphqlURI']                   string
+     * $params['route']       string
+     * $params['ingoreRoute'] boolean
+     * $params['graphqlURI']  string
      * ]
      */
     public function __construct(array $params = [])
