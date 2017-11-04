@@ -24,9 +24,6 @@
     "autoload": {
         "psr-4": {
             "GraphiQLMiddleware\\": "src/"
-        },
-        "classmap": [
-            "vendor/phpunit/php-text-template/src/"
-        ]
+        }
     }
 }
