@@ -1,8 +1,15 @@
 {
     "name": "rromanovsky/graphiql-middleware",
-    "description": "GraphiQL PSR-7 Middleware",
+    "description": "GraphiQL PSR-7 Middleware based on https://github.com/graphql/graphiql",
+    "homepage": "https://github.com/rromanovsky/graphiql-middleware",
     "type": "library",
     "license": "MIT",
+    "keywords": [
+        "graphiql",
+        "graphql",
+        "psr",
+        "psr-7"
+    ],
     "authors": [
         {
             "name": "Roman Romanovsky",
@@ -10,12 +17,16 @@
         }
     ],
     "require": {
-        "psr/http-message": "^1.0"
+        "php": ">=5.4",
+        "psr/http-message": "^1.0",
+        "phpunit/php-text-template": "^1.2"
     },
-
     "autoload": {
         "psr-4": {
             "GraphiQLMiddleware\\": "src/"
-        }
+        },
+        "classmap": [
+            "vendor/phpunit/php-text-template/src/"
+        ]
     }
 }
