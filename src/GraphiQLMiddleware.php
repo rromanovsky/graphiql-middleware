@@ -9,39 +9,22 @@ class GraphiQLMiddleware
     /**
      * @var string
      */
-    private $route = '';
+    private $graphiqlRoute = '';
 
     /**
      * @var string
      */
-    private $graphqlURI = '/graphql';
+    private $graphqlRoute = '';
 
     /**
-     * @var bool
+     * GraphiQLMiddleware constructor.
+     * @param string $graphiqlRoute
+     * @param string $graphqlRoute
      */
-    private $ingoreRoute = false;
-
-    /**
-     * @param array $params
-     *
-     * $params['route']       string
-     * $params['ingoreRoute'] boolean
-     * $params['graphqlURI']  string
-     * ]
-     */
-    public function __construct(array $params = [])
+    public function __construct($graphiqlRoute = '/graphiql', $graphqlRoute = '/graphql')
     {
-        if (array_key_exists('route', $params)) {
-            $this->route = $params['route'];
-        }
-
-        if (array_key_exists('ingoreRoute', $params)) {
-            $this->ingoreRoute = $params['ingoreRoute'];
-        }
-
-        if (array_key_exists('graphqlURI', $params)) {
-            $this->graphqlURI = $params['graphqlURI'];
-        }
+        $this->graphiqlRoute = $graphiqlRoute;
+        $this->graphqlRoute = $graphqlRoute;
     }
 
     /**
@@ -52,9 +35,7 @@ class GraphiQLMiddleware
      */
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
     {
-        if ($request->getMethod() === 'GET' && (
-            $this->ingoreRoute || !empty($this->route) && $this->route === $request->getUri()->getPath()
-        )) {
+        if ($request->getMethod() === 'GET' && $this->graphiqlRoute === $request->getUri()->getPath()) {
             $response->getBody()->write($this->render($request));
 
             return $response;
@@ -86,6 +67,6 @@ class GraphiQLMiddleware
         $requestPath = $request->getUri()->getPath();
         $routePosition = strrpos($requestURI, $requestPath);
 
-        return substr_replace($requestURI, $this->graphqlURI, $routePosition, strlen($requestPath));
+        return substr_replace($requestURI, $this->graphqlRoute, $routePosition, strlen($requestPath));
     }
 }
