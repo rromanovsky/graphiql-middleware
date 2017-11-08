@@ -13,12 +13,6 @@ composer require rromanovsky/graphiql-middleware
 - Slim
     ```php
     use GraphiQLMiddleware\GraphiQLMiddleware;
-    // 1) Allow middleware to be executed on '/graphiql' route
-    $app->add(new GraphiQLMiddleware(['route' => '/graphiql']));
-    // 2) Allow middleware to be executed on '/graphiql' route
-    $app->get("/graphiql", function($request, $response, $args) {
-        return $response;
-    })->add(new GraphiQLMiddleware(['ingoreRoute' => true]));
-    // 3) Allow middleware to be executed on any route
-    $app->add(new GraphiQLMiddleware(['ingoreRoute' => true]));
+    // By default the middleware will be executed on '/graphiql' route
+    $app->add(new GraphiQLMiddleware());
     ```
